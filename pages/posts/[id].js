@@ -23,7 +23,7 @@ export default function Post({ story, preview }) {
   const previewImage =
     "https://api.taleguild.com/uploads/Snowball-earth_f61cdd6af5.jpeg";
 
-  const url = story && story.image ? story.image.url : previewImage;
+  const url = story && story.image ? 'https://api.taleguild.com/uploads/' + story.image.url : previewImage;
   return (
     <>
       <Container>
