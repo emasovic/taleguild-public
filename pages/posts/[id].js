@@ -30,10 +30,23 @@ export default function Post({ story, preview }) {
             <article>
               <Head>
                 <title>
-                  {story.title} | Next.js Blog Example with {CMS_NAME}
+                  {story.title} | Taleguild | Social Network for Short Stories
+                  Writers & Essayists
                 </title>
+                <meta name="description" content={story.description} />
+                <meta name="title" content={story.title} />
+
+                <meta property="og:title" content={story.title} />
+                <meta property="og:description" content={story.description} />
+                <meta property="og:image" content={story.image && story.image.url} />
+
+                <meta property="twitter:title" content={story.title} />
+                <meta
+                  property="twitter:description"
+                  content={story.description}
+                />
+                <meta property="twitter:image" content={story.image && story.image.url} />
                 <meta property="description" content={story.description} />
-               {story.image && <meta property="og:image" content={story.image.url} />} 
               </Head>
               <PostHeader
                 title={story.title}
