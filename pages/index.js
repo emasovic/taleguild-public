@@ -3,13 +3,12 @@ import MoreStories from '@/components/more-stories'
 import HeroPost from '@/components/hero-post'
 import Intro from '@/components/intro'
 import Layout from '@/components/layout'
-import { getAllPostsForHome } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
+import { getStories, getStory } from '@/lib/api'
 
-export default function Index({ allPosts, preview }) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+export default function Index({ story, preview }) {
+console.log(story)
   return (
     <>
       <Layout preview={preview}>
@@ -18,17 +17,18 @@ export default function Index({ allPosts, preview }) {
         </Head>
         <Container>
           <Intro />
-          {heroPost && (
+           {story && (
             <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+              title={story.title}
+              coverImage={story.image}
+              date={story.created_at}
+              author={story.user}
+              slug={story.slug}
+              id={story.id}
+              excerpt={story.excerpt}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {/*{morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
         </Container>
       </Layout>
     </>
@@ -36,8 +36,8 @@ export default function Index({ allPosts, preview }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPostsForHome(preview)) || []
+  const story = await getStory(2)
   return {
-    props: { allPosts, preview },
+    props: { story },
   }
 }
