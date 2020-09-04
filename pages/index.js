@@ -36,7 +36,7 @@ console.log(story)
 }
 
 export async function getStaticProps({ preview = null }) {
-  const story = await getStory(2)
+  const story = null
   return {
     props: { story },
   }
