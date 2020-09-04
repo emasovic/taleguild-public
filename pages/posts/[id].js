@@ -22,8 +22,10 @@ export default function Post({ story, preview }) {
   }
   const previewImage =
     "https://api.taleguild.com/uploads/Snowball-earth_f61cdd6af5.jpeg";
+
+  const url = story && story.image ? story.image.url : previewImage;
   return (
-    <Layout preview={preview}>
+    <>
       <Container>
         <Header />
         {router.isFallback ? (
@@ -41,11 +43,11 @@ export default function Post({ story, preview }) {
                   description: story.description,
                   images: [
                     {
-                      url: {previewImage},
+                      url,
                       width: 800,
                       height: 600,
                       alt: "Og Image Alt",
-                    }
+                    },
                   ],
                   site_name: "SiteName",
                 }}
@@ -69,7 +71,7 @@ export default function Post({ story, preview }) {
           </>
         )}
       </Container>
-    </Layout>
+    </>
   );
 }
 
