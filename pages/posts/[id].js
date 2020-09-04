@@ -13,13 +13,15 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import markdownToHtml from "@/lib/markdownToHtml";
 import { getStory, getStories } from "@/lib/api";
+import { NextSeo } from "next-seo";
 
 export default function Post({ story, preview }) {
   const router = useRouter();
   if (!router.isFallback && !story?.id) {
     return <ErrorPage statusCode={404} />;
   }
-  const previewImage = "https://api.taleguild.com/uploads/Snowball-earth_f61cdd6af5.jpeg"
+  const previewImage =
+    "https://api.taleguild.com/uploads/Snowball-earth_f61cdd6af5.jpeg";
   return (
     <Layout preview={preview}>
       <Container>
@@ -29,26 +31,30 @@ export default function Post({ story, preview }) {
         ) : (
           <>
             <article>
-              <Head>
-                <title>
-                  {story.title} | Taleguild | Social Network for Short Stories
-                  Writers & Essayists
-                </title>
-                <meta name="description" content={story.description} />
-                <meta name="title" content={story.title} />
-                <meta property="og:image" content={previewImage} key="ogimage" />
-                <meta property="og:title" content={story.title} />
-                <meta property="og:description" content={story.description} />
-                {/* <meta property="og:image" content={story.image && story.image.url} /> */}
-
-                <meta property="twitter:title" content={story.title} />
-                <meta
-                  property="twitter:description"
-                  content={story.description}
-                />
-                <meta property="twitter:image" content={previewImage} />
-                <meta property="description" content={story.description} />
-              </Head>
+              <NextSeo
+                title={story.title}
+                description={story.description}
+                // canonical="https://www.canonical.ie/"
+                openGraph={{
+                  // url: "https://www.url.ie/a",
+                  title: story.title,
+                  description: story.description,
+                  images: [
+                    {
+                      url: {previewImage},
+                      width: 800,
+                      height: 600,
+                      alt: "Og Image Alt",
+                    }
+                  ],
+                  site_name: "SiteName",
+                }}
+                twitter={{
+                  handle: "@handle",
+                  site: "@site",
+                  cardType: "summary_large_image",
+                }}
+              />
               <PostHeader
                 title={story.title}
                 coverImage={story.image}
