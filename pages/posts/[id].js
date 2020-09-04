@@ -19,6 +19,7 @@ export default function Post({ story, preview }) {
   if (!router.isFallback && !story?.id) {
     return <ErrorPage statusCode={404} />;
   }
+  const previewImage = "https://api.taleguild.com/uploads/Snowball-earth_f61cdd6af5.jpeg"
   return (
     <Layout preview={preview}>
       <Container>
@@ -35,17 +36,17 @@ export default function Post({ story, preview }) {
                 </title>
                 <meta name="description" content={story.description} />
                 <meta name="title" content={story.title} />
-
+                <meta property="og:image" content={previewImage} key="ogimage" />
                 <meta property="og:title" content={story.title} />
                 <meta property="og:description" content={story.description} />
-                <meta property="og:image" content={story.image && story.image.url} />
+                {/* <meta property="og:image" content={story.image && story.image.url} /> */}
 
                 <meta property="twitter:title" content={story.title} />
                 <meta
                   property="twitter:description"
                   content={story.description}
                 />
-                <meta property="twitter:image" content={story.image && story.image.url} />
+                <meta property="twitter:image" content={previewImage} />
                 <meta property="description" content={story.description} />
               </Head>
               <PostHeader
