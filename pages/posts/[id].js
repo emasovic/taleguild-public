@@ -33,7 +33,7 @@ export default function Post({ story, preview }) {
                   {story.title} | Next.js Blog Example with {CMS_NAME}
                 </title>
                 <meta property="description" content={story.description} />
-                <meta property="og:image" content={story.image.url} />
+               {story.image && <meta property="og:image" content={story.image.url} />} 
               </Head>
               <PostHeader
                 title={story.title}
