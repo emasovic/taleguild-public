@@ -1,9 +1,28 @@
-import Avatar from '../components/avatar'
-import Date from '../components/date'
-import CoverImage from '../components/cover-image'
-import PostTitle from '../components/post-title'
+import { useEffect } from "react";
 
-export default function PostHeader({ title, coverImage, date, author, description }) {
+import { useRouter } from "next/router";
+
+import Avatar from "../components/avatar";
+import Date from "../components/date";
+import CoverImage from "../components/cover-image";
+import PostTitle from "../components/post-title";
+
+const goToStory = (slug) =>
+  process.env.NEXT_PUBLIC_STRAPI_UI_URL + "/story/" + slug;
+
+export default function PostHeader({
+  title,
+  coverImage,
+  date,
+  author,
+  description,
+  slug,
+}) {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push(goToStory(slug));
+  }, []);
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -15,15 +34,13 @@ export default function PostHeader({ title, coverImage, date, author, descriptio
       </div>
       <div className="max-w-2xl mx-auto">
         <div className="block md:hidden mb-6">
-        {author && <Avatar name={author.username} picture={author.avatar} />}
+          {author && <Avatar name={author.username} picture={author.avatar} />}
         </div>
         <div className="mb-6 text-lg">
           <Date dateString={date} />
         </div>
-        <div className="mb-6 text-lg">
-          {description}
-        </div>
+        <div className="mb-6 text-lg">{description}</div>
       </div>
     </>
-  )
+  );
 }

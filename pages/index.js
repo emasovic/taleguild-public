@@ -1,14 +1,12 @@
-import Container from '@/components/container'
-import MoreStories from '@/components/more-stories'
-import HeroPost from '@/components/hero-post'
-import Intro from '@/components/intro'
-import Layout from '@/components/layout'
-import Head from 'next/head'
-import { CMS_NAME } from '@/lib/constants'
-import { getStories, getStory } from '@/lib/api'
+import Container from "@/components/container";
+import MoreStories from "@/components/more-stories";
+import HeroPost from "@/components/hero-post";
+import Intro from "@/components/intro";
+import Layout from "@/components/layout";
+import Head from "next/head";
+import { CMS_NAME } from "@/lib/constants";
 
 export default function Index({ story, preview }) {
-console.log(story)
   return (
     <>
       <Layout preview={preview}>
@@ -17,7 +15,7 @@ console.log(story)
         </Head>
         <Container>
           <Intro />
-           {story && (
+          {story && (
             <HeroPost
               title={story.title}
               coverImage={story.image}
@@ -28,16 +26,15 @@ console.log(story)
               excerpt={story.excerpt}
             />
           )}
-          {/*{morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
         </Container>
       </Layout>
     </>
-  )
+  );
 }
 
 export async function getStaticProps({ preview = null }) {
-  const story = null
+  const story = null;
   return {
     props: { story },
-  }
+  };
 }
