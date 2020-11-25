@@ -22,7 +22,7 @@ export default function Post({ story, preview }) {
 
   const url =
     story && story.image
-      ? process.env.NEXT_PUBLIC_STRAPI_UI_URL + '/uploads' + story.image.url
+      ? process.env.NEXT_PUBLIC_STRAPI_API_URL + story.image.url
       : previewImage;
 
   return (

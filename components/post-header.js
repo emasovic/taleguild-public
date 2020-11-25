@@ -20,9 +20,9 @@ export default function PostHeader({
 }) {
   const router = useRouter();
 
-  useEffect(() => {
-    setTimeout(() => router.push(goToStory(slug)), 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => router.push(goToStory(slug)), 2000);
+  // }, []);
   return (
     <>
       <PostTitle>{title}</PostTitle>
