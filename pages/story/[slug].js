@@ -46,8 +46,8 @@ export default function Post({ story }) {
                   alt: story.title,
                 },
               ],
-              url: redirectUrl,
-              site_name: "https://taleguild.com/",
+              // url: redirectUrl,
+              // site_name: "https://taleguild.com/",
             }}
             twitter={{
               handle: "@handle",

@@ -1,19 +1,16 @@
+import { useEffect } from "react";
+
 import { useRouter } from "next/router";
 
 export default function Redirect({ url }) {
   const router = useRouter();
 
+  useEffect(() => {
+    setTimeout(() => router.push(goToStory(url)), 500);
+  }, []);
   return (
     <>
-      <div>
-        Human validation
-        <div
-          style={{ background: "red", cursor: "pointer" }}
-          onClick={() => router.push(url)}
-        >
-          click here
-        </div>
-      </div>
+      <div>Redirecting...</div>
     </>
   );
 }
