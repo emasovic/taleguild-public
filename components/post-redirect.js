@@ -6,7 +6,7 @@ export default function Redirect({ url }) {
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => router.push(goToStory(url)), 500);
+    setTimeout(() => router.push(url), 500);
   }, []);
   return (
     <>
