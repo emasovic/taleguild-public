@@ -23,7 +23,8 @@ export default function Post({ story }) {
       ? process.env.NEXT_PUBLIC_STRAPI_API_URL + story.image.url
       : previewImage;
 
-  const redirectUrl = process.env.NEXT_PUBLIC_STRAPI_UI_URL + "/story/" + story?.slug;
+  const redirectUrl =
+    process.env.NEXT_PUBLIC_STRAPI_UI_URL + "/story/" + story?.slug;
 
   return (
     <Container>
@@ -34,7 +35,6 @@ export default function Post({ story }) {
           <NextSeo
             title={story.title}
             description={story.description}
-
             openGraph={{
               title: story.title,
               description: story.description,
@@ -47,7 +47,7 @@ export default function Post({ story }) {
                 },
               ],
               url: redirectUrl,
-              site_name: 'https://taleguild.com/'
+              site_name: "https://taleguild.com/",
             }}
             twitter={{
               handle: "@handle",
