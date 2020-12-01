@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "@/components/container";
-import Header from "@/components/header";
-import PostHeader from "@/components/post-header";
-import SectionSeparator from "@/components/section-separator";
+import PostRedirect from "@/components/post-redirect";
 
 import PostTitle from "@/components/post-title";
 
@@ -11,7 +9,7 @@ import { getStory, getStories } from "@/lib/api";
 import { NextSeo } from "next-seo";
 import { getIdFromSlug } from "@/lib/story";
 
-export default function Post({ story, preview }) {
+export default function Post({ story }) {
   const router = useRouter();
 
   if (!router.isFallback && !story?.id) {
@@ -25,51 +23,42 @@ export default function Post({ story, preview }) {
       ? process.env.NEXT_PUBLIC_STRAPI_API_URL + story.image.url
       : previewImage;
 
+  const redirectUrl = process.env.NEXT_PUBLIC_STRAPI_UI_URL + "/story/" + story?.slug;
+
   return (
-    <>
-      <Container>
-        <Header />
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article>
-              <NextSeo
-                title={story.title}
-                description={story.description}
-                openGraph={{
-                  title: story.title,
-                  description: story.description,
-                  images: [
-                    {
-                      url,
-                      width: 800,
-                      height: 600,
-                      alt: "Og Image Alt",
-                    },
-                  ],
-                  site_name: "SiteName",
-                }}
-                twitter={{
-                  handle: "@handle",
-                  site: "@site",
-                  cardType: "summary_large_image",
-                }}
-              />
-              <PostHeader
-                title={story.title}
-                coverImage={story.image}
-                date={story.created_at}
-                author={story.user}
-                description={story.description}
-                slug={story.slug}
-              />
-            </article>
-            <SectionSeparator />
-          </>
-        )}
-      </Container>
-    </>
+    <Container>
+      {router.isFallback ? (
+        <PostTitle>Loading…</PostTitle>
+      ) : (
+        <>
+          <NextSeo
+            title={story.title}
+            description={story.description}
+
+            openGraph={{
+              title: story.title,
+              description: story.description,
+              images: [
+                {
+                  url,
+                  width: 1200,
+                  height: 630,
+                  alt: story.title,
+                },
+              ],
+              url: redirectUrl,
+              site_name: 'https://taleguild.com/'
+            }}
+            twitter={{
+              handle: "@handle",
+              site: "@site",
+              cardType: "summary_large_image",
+            }}
+          />
+          <PostRedirect url={redirectUrl} />
+        </>
+      )}
+    </Container>
   );
 }
 
