@@ -1,0 +1,21 @@
+.redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 160px;
+}
+
+.h1 {
+  font-weight: 900;
+  font-size: 32px;
+  color: #231f1a;
+  margin: 36px 0;
+  font-family: var(--font-merriweather);
+}
+
+.regular {
+  font-size: 14px;
+  color: #847b71;
+  font-family: var(--font-lato);
+}

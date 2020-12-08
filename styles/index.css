@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.grayscale {
-  filter: grayscale(1);
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+:root {
+  --font-lato: "Lato", sans-serif;
+  --font-merriweather: "Merriweather", serif;
 }

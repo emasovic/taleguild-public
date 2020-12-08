@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
+
 import Container from "@/components/container";
-import PostRedirect from "@/components/post-redirect";
+import StoryRedirect from "@/components/story-redirect";
 
 import PostTitle from "@/components/post-title";
+import StoryMeta from "@/components/story-meta";
 
 import { getStory, getStories } from "@/lib/api";
-import { NextSeo } from "next-seo";
 import { getIdFromSlug } from "@/lib/story";
 
 export default function Post({ story }) {
@@ -15,16 +16,17 @@ export default function Post({ story }) {
   if (!router.isFallback && !story?.id) {
     return <ErrorPage statusCode={404} />;
   }
-  const previewImage =
-    "https://api.taleguild.com/uploads/Snowball-earth_f61cdd6af5.jpeg";
 
   const url =
     story && story.image
       ? process.env.NEXT_PUBLIC_STRAPI_API_URL + story.image.url
-      : previewImage;
+      : process.env.NEXT_PUBLIC_STRAPI_SHARE_URL + "/images/taleguild-logo.png";
 
   const redirectUrl =
     process.env.NEXT_PUBLIC_STRAPI_UI_URL + "/story/" + story?.slug;
+
+  const siteUrl =
+    process.env.NEXT_PUBLIC_STRAPI_SHARE_URL + "/story/" + story?.slug;
 
   return (
     <Container>
@@ -32,30 +34,13 @@ export default function Post({ story }) {
         <PostTitle>Loading…</PostTitle>
       ) : (
         <>
-          <NextSeo
+          <StoryMeta
             title={story.title}
             description={story.description}
-            openGraph={{
-              title: story.title,
-              description: story.description,
-              images: [
-                {
-                  url,
-                  width: 1200,
-                  height: 630,
-                  alt: story.title,
-                },
-              ],
-              // url: redirectUrl,
-              // site_name: "https://taleguild.com/",
-            }}
-            twitter={{
-              handle: "@handle",
-              site: "@site",
-              cardType: "summary_large_image",
-            }}
+            imageUrl={url}
+            siteUrl={siteUrl}
           />
-          <PostRedirect url={redirectUrl} />
+          <StoryRedirect url={redirectUrl} />
         </>
       )}
     </Container>
